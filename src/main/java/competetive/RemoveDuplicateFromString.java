@@ -1,9 +1,8 @@
-package com.java.competetive;
+package competetive;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 class RemoveDuplicateFromString {
@@ -28,8 +27,7 @@ class RemoveDuplicateFromString {
 			int sizeAfter = distinctElements.size();
 			System.out.println(sizeB - sizeAfter);
 			return sizeB - sizeAfter;
-		}
-		else
+		} else
 			return 0;
 
 	}

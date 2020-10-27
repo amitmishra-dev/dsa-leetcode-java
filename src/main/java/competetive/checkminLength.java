@@ -1,15 +1,12 @@
-package com.java.competetive;
+package competetive;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class checkminLength {
-	
+
 	/**
-	 * Check minimum length 
-	 * Cut them [2,3,4]
-	 * sum = 7 (Impossible)
-	 * Sum = 5 (Possible) 
+	 * Check minimum length Cut them [2,3,4] sum = 7 (Impossible) Sum = 5 (Possible)
 	 * 
 	 * 
 	 * @param lengths
@@ -48,11 +45,11 @@ public class checkminLength {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-List<Long> l= new ArrayList<>();
-l.add((long) 2);
-l.add((long) 3);
-l.add((long) 4);
-System.out.println(cutThemAll(l, 9));
+		List<Long> l = new ArrayList<>();
+		l.add((long) 2);
+		l.add((long) 3);
+		l.add((long) 4);
+		System.out.println(cutThemAll(l, 9));
 	}
 
 }

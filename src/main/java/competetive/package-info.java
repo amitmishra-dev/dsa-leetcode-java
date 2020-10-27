@@ -1,1 +1,1 @@
-package com.java.competetive;
+package competetive;

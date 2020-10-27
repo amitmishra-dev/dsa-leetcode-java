@@ -1,4 +1,4 @@
-package com.java.ds;
+package ds;
 
 public class tree1 {
 

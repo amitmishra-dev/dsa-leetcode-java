@@ -1,16 +1,14 @@
-package com.java.competetive;
+package competetive;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class generateSequenceInteger{
+public class generateSequenceInteger {
 
 	/**
 	 * Generate the Sequence Integer
 	 * 
-	 * n =3
-	 * lo = 5 hi= 9
+	 * n =3 lo = 5 hi= 9
 	 * 
 	 * ans= [8, 9, 8]
 	 * 
@@ -21,7 +19,7 @@ public class generateSequenceInteger{
 		// TODO Auto-generated method stub
 		String s = "abcabc";
 
-		System.out.println(SequenceInteger(3, 5,9));
+		System.out.println(SequenceInteger(3, 5, 9));
 	}
 
 	private static List<Integer> SequenceInteger(int n, int lo, int hi) {

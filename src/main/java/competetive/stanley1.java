@@ -1,4 +1,4 @@
-package com.java.competetive;
+package competetive;
 
 public class stanley1 {
 
@@ -9,10 +9,10 @@ public class stanley1 {
 
 	private static void nodec(int i) {
 		// TODO Auto-generated method stub
-		if(i >= 0) {
-			
-			nodec(i-1);
+		if (i >= 0) {
+
+			nodec(i - 1);
 		}
-		System.out.println("num : "+i);
+		System.out.println("num : " + i);
 	}
 }
