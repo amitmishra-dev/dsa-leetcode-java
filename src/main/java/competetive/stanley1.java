@@ -12,7 +12,8 @@ public class stanley1 {
 		if (i >= 0) {
 
 			nodec(i - 1);
+			System.out.println("num : " + i);
 		}
-		System.out.println("num : " + i);
+
 	}
 }

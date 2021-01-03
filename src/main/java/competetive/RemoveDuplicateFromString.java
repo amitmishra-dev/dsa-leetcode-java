@@ -1,6 +1,7 @@
 package competetive;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ class RemoveDuplicateFromString {
 			}
 			int sizeB = st.size();
 			List<Character> distinctElements = st.stream().distinct().collect(Collectors.toList());
+			System.out.println("list :: " + distinctElements.toString());
 			int sizeAfter = distinctElements.size();
 			System.out.println(sizeB - sizeAfter);
 			return sizeB - sizeAfter;

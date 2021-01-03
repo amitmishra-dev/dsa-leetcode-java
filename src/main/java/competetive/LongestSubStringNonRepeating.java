@@ -31,8 +31,8 @@ public class LongestSubStringNonRepeating {
 
 	static int lengthOfLongestSubstring(String s) {
 
-		if (s.contains("c"))
-			System.out.println(s.indexOf('c'));
+		if (s.contains("f"))
+			System.out.println("index :: " +s.indexOf('f'));
 
 		String st1 = "";
 		String st2 = "";
@@ -79,7 +79,6 @@ public class LongestSubStringNonRepeating {
 				} else
 					fst = st1;
 			}
-
 		}
 		return fst + ":" + pfst;
 	}

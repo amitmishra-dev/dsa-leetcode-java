@@ -34,7 +34,7 @@ public class dataTypesToStream {
 
 		System.out.println("***************");
 		DoubleStream doubleStream = DoubleStream.of(1.1, 2.2, 3.3, 7.7);
-		OptionalDouble optDoubleStream = doubleStream.reduce((a1, b1) -> a1 + b1);
+		OptionalDouble optDoubleStream = doubleStream.reduce((a1,b1) -> a1 + b1);
 		System.out.println("double Stream SUM : " + optDoubleStream.getAsDouble());
 
 	}
