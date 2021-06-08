@@ -1,0 +1,105 @@
+Hashmap
+=============================================
+https://howtodoinjava.com/java/collections/hashmap/how-hashmap-works-in-java/
+
+public V put(K key, V value) {
+    if (key == null)
+    return putForNullKey(value);
+    int hash = hash(key.hashCode());
+    int i = indexFor(hash, table.length);
+    for (Entry<K , V> e = table[i]; e != null; e = e.next) {
+        Object k;
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+
+    modCount++;
+    addEntry(hash, key, value, i);
+    return null;
+}
+
+hashset
+=============================================
+
+
+
+
+
+concurrent HashMap
+=============================================
+https://dzone.com/articles/how-concurrenthashmap-works-internally-in-java#:~:text=ConcurrentHashMap%3A%20It%20allows%20concurrent%20access,was%20introduced%20to%20improve%20performance.
+
+read+write from same segment
+use: for more reads than write
+put and delete in synchronized
+get can do as many as
+by default 32 segments
+
+Segment seg = segments[(hash & 0x1F)];     // segments is an array defined above
+synchronized (seg) {
+  // code to add
+
+  int index = hash & table.length - 1; // hash we have calculated for key and table is Entry[] table
+  Entry first = table[index];
+  for (Entry e = first; e != null; e = e.next) {
+    if ((e.hash == hash) && (eq(key, e.key))) { // if key already exist means updating the value
+      Object oldValue = e.value;
+      e.value = value;
+      return oldValue;
+    }
+  }
+
+  Entry newEntry = new Entry(hash, key, value, first); // new entry, i.e. this key not exist in map
+  table[index] = newEntry; // Putting the Entry object at calculated Index
+}
+
+Mutable class having collection
+=============================================
+https://stackoverflow.com/questions/34109363/how-can-we-maintain-immutability-of-a-class-with-a-mutable-reference
+
+
+HeapSort
+=============================================
+Applications of HeapSort
+1. Sort a nearly sorted (or K sorted) array
+2. k largest(or smallest) elements in an array
+
+https://www.programiz.com/dsa/heap-sort
+
+QuickSort
+=============================================
+
+BinarySearch
+=============================================
+
+Garbage collector algo
+=============================================
+
+
+
+
+
+
+
+
+
+Programs/
+29 Above
+
+30
+Morning: DS trees/stack/LL/Matrix/
+Evening: Dynamic programming(4  question)
+
+31
+Morning: JAVA/SPRING Question
+Evening: pubsub(rabbitMq)
+
+1
+Morning: SYSTEMDESIGN/
+Evening: programs(10 question)
+
+

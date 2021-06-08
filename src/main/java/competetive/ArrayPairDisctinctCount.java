@@ -7,7 +7,7 @@ public class ArrayPairDisctinctCount {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] arr = { 11, 2, 103, 4 };
+		int[] arr = {0,2,2,5,5,5,2,2};//{ 11, 2, 103, 4 };
 		// {0,2,2,5,5,5}; count- 3
 
 		disctinctList(arr);

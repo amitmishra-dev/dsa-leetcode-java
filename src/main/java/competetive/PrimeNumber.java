@@ -25,7 +25,7 @@ class PrimeNumber {
 	private static boolean isPrimeNumberSqRt(int i) {
 		int count=0;
 		//brute loop from 1 to i
-		for (int j = 2; j < Math.sqrt(i); j++) {
+		for (int j = 2; j <= Math.sqrt(i); j++) {
 			if(i % j ==0)
 				return false;
 		}

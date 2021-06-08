@@ -35,8 +35,8 @@ public class LongestCommonSubsequence {
 
 
     public static void main(String[] args) {
-        String A="aabbcc";
-        String B="bcc";
+        String A="aabbcbc";
+        String B="bc";
         System.out.println(solve(A,B));
     }
 }

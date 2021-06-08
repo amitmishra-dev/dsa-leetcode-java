@@ -1,0 +1,364 @@
+package doc;						STACK
+				********************	
+Reverse a stack using recursion
+========================================================
+    static void insert_at_bottom(char x)
+    {
+        if(st.isEmpty())
+            st.push(x);
+ 
+        else
+        {
+            // the item is inserted at the bottom
+            char a = st.peek();
+            st.pop();
+            insert_at_bottom(x);
+            st.push(a);
+        }
+    }
+    // insert_at_bottom()
+    static void reverse()
+    {
+        if(st.size() > 0)
+        {
+            char x = st.peek();
+            st.pop();
+            reverse();
+            insert_at_bottom(x);
+        }
+    }
+========================================================
+Sort a stack using recursion
+    static void sortedInsert(Stack<Integer> s, int x)
+    {
+        if (s.isEmpty() || x > s.peek())
+        {
+            s.push(x);
+            return;
+        }
+      
+        int temp = s.pop();
+        sortedInsert(s, x);
+      
+        s.push(temp);
+    }
+      
+    static void sortStack(Stack<Integer> s)
+    {
+        // If stack is not empty
+        if (!s.isEmpty())
+        {
+            int x = s.pop();
+            sortStack(s);
+
+            sortedInsert(s, x);
+        }
+    }
+}
+========================================================
+Sort a stack using a temporary stack
+
+// This function return the sorted stack
+    public static Stack<Integer> sortstack(Stack<Integer> 
+                                             input)
+    {
+        Stack<Integer> tmpStack = new Stack<Integer>();
+        while(!input.isEmpty())
+        {
+            // pop out the first element
+            int tmp = input.pop();
+         
+            // while temporary stack is not empty and
+            // top of stack is greater than temp
+            while(!tmpStack.isEmpty() && tmpStack.peek() 
+                                                 > tmp)
+            {
+                // pop from temporary stack and 
+                // push it to the input stack
+            input.push(tmpStack.pop());
+            }
+             
+            // push temp in tempory of stack
+            tmpStack.push(tmp);
+        }
+        return tmpStack;
+    }
+========================================================
+Reverse a stack without using extra space in O(n)
+    // Reverses the stack using simple
+    // linked list reversal logic.
+    public void reverse()
+    {
+        StackNode prev, cur, succ;
+        cur = prev = this.top;
+        cur = cur.next;
+        prev.next = null;
+        while (cur != null) {
+ 
+            succ = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = succ;
+        }
+        this.top = prev;
+    }
+
+========================================================	
+Delete middle element of a stack
+
+	static void deleteMid(Stack<Character> st,
+                              int size, int curr)
+    {
+         
+        // If stack is empty or all items
+        // are traversed
+        if (st.empty() || curr == size)
+            return;
+       
+        char x = st.pop();
+         
+        deleteMid(st, size, curr+1);
+         
+        // Put all items back except middle
+        if (curr != size/2)
+            st.push(x);
+    }
+========================================================
+Sorting array using Stacks
+
+    static Stack<Integer> sortStack(Stack<Integer> input)
+    {
+        Stack<Integer> tmpStack = 
+                       new Stack<Integer>();
+     
+        while (!input.empty())
+        {
+            int tmp = input.peek();
+            input.pop();
+     
+            // while temporary stack is 
+            // not empty and top of stack
+            // is smaller than temp
+            while (!tmpStack.empty() &&
+                    tmpStack.peek() < tmp)
+            {
+                input.push(tmpStack.peek());
+                tmpStack.pop();
+            }
+			tmpStack.push(tmp);
+        }
+     
+        return tmpStack;
+    }
+     
+    static void sortArrayUsingStacks(int []arr, 
+                                     int n)
+    {
+        Stack<Integer> input = 
+                       new Stack<Integer>();
+        for (int i = 0; i < n; i++)
+            input.push(arr[i]);
+     
+        Stack<Integer> tmpStack = 
+                       sortStack(input);
+     
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = tmpStack.peek();
+            tmpStack.pop();
+        }
+    }
+
+
+
+========================================================
+Delete array elements which are smaller than next or become smaller
+void deleteElements(int arr[], int n, int k)
+{ 
+
+    stack<int> s;
+    s.push(arr[0]);
+ 
+    int count = 0;
+    for (int i=1; i<n; i++) {
+         
+        // condition for deleting an element
+        while (!s.empty() && s.top() < arr[i] 
+                            && count < k) {                                     
+            s.pop();
+            count++;
+        }
+         
+        s.push(arr[i]);
+    }
+    int m = s.size();
+    vector<int> v(m); // Size of vector is m
+    while (!s.empty()) {
+         
+        // push element from stack to vector v
+        v[--m] = s.top();
+        s.pop();
+    }
+    for (auto x : v)
+        cout << x << " ";
+         
+    cout << endl;
+}
+
+========================================================
+Check if a queue can be sorted into another queue using a stack
+static boolean checkSorted(int n)
+    {
+        Stack<Integer> st = 
+                    new Stack<Integer>();
+        int expected = 1;
+        int fnt;
+        while (q.size() != 0) 
+        {
+            fnt = q.peek();
+            q.poll();
+     
+            if (fnt == expected)
+                expected++;
+     
+            else
+            {
+                if (st.size() != 0) 
+                {
+                    st.push(fnt);
+                }
+                else if (st.size() != 0 && 
+                         st.peek() < fnt) 
+                {
+                    return false;
+                }
+     
+                else
+                    st.push(fnt);
+            }
+     
+            while (st.size() != 0 && 
+                   st.peek() == expected) 
+            {
+                st.pop();
+                expected++;
+            }
+        }
+        if (expected - 1 == n && 
+                st.size() == 0)
+            return true;
+     
+        return false;
+    }
+========================================================
+Reverse individual words
+static void reverseWords(String str)
+{
+    Stack<Character> st=new Stack<Character>();
+	for (int i = 0; i < str.length(); ++i) {
+        if (str.charAt(i) != ' ')
+            st.push(str.charAt(i));
+        else {
+            while (st.empty() == false) {
+                System.out.print(st.pop());
+                 
+            }
+            System.out.print(" ");
+        }
+    }
+  
+    while (st.empty() == false) {
+        System.out.print(st.pop());
+         
+    }
+}
+========================================================
+Find maximum depth of nested parenthesis in a string  “( ((X)) (((Y))) )”
+
+int maxDepth(string S)
+{
+    int current_max = 0; // current count
+    int max = 0;    // overall maximum count
+    int n = S.length();
+ 
+    // Traverse the input string
+    for (int i = 0; i< n; i++)
+    {
+        if (S[i] == '(')
+        {
+            current_max++;
+ 
+            // update max if required
+            if (current_max> max)
+                max = current_max;
+        }
+        else if (S[i] == ')')
+        {
+            if (current_max>0)
+                current_max--;
+            else
+                return -1;
+        }
+    }
+ 
+    // finally check for unbalanced string
+    if (current_max != 0)
+        return -1;
+ 
+    return max;
+}
+========================================================
+Implement Queue using Stacks
+
+    static class Queue
+    {
+        Stack<Integer> stack1 ;
+        Stack<Integer> stack2 ;
+    }
+     
+    /* Function to push an item to stack*/
+    static void push(Stack<Integer> top_ref, int new_data)
+    {
+        //Push the data onto the stack
+        top_ref.push(new_data);
+    }
+     
+    /* Function to pop an item from stack*/
+    static int pop(Stack<Integer> top_ref)
+    {
+        /*If stack is empty then error */
+        if(top_ref.isEmpty())
+        {
+            System.out.println("Stack Underflow");
+            System.exit(0);    
+        }
+        //pop the data from the stack
+        return top_ref.pop(); 
+    }
+    //Function to enqueue an item to the queue
+    static void enQueue(Queue q, int x)
+    {
+        push(q.stack1, x);
+    }
+    static int deQueue(Queue q)
+    {
+        int x;
+        if(q.stack1.isEmpty() && q.stack2.isEmpty() )
+        {
+            System.out.println("Q is empty");
+            System.exit(0);
+        }
+        stack2 is empty */
+        if(q.stack2.isEmpty())
+        {
+            while(!q.stack1.isEmpty())
+            {
+            x = pop(q.stack1);
+            push(q.stack2, x);
+              
+            }
+        }
+        x = pop(q.stack2);
+        return x;
+    }
+========================================================
