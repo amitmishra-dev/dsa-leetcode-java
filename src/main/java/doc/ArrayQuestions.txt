@@ -1,0 +1,281 @@
+Check if a key is present in every segment of size k in an array
+----------------------------------------------------
+arr[] = { 3, 5, 2, 4, 9, 3, 1, 7, 3, 11, 12, 3}
+x = 3
+k = 3
+Output : Yes
+static boolean findxinkindowSize(int N, int[] arr,
+                                     int x, int k)
+    {
+        int i;
+        boolean b = false;
+
+        // Iterate from 0 to N - 1
+        for (i = 0; i < N; i = i + k) {
+
+            // Iterate from 0 to k - 1
+            for (int j = 0; j < k; j++) {
+                if (i + j < N && arr[i + j] == x)
+                    break;
+
+                if (j == k)
+                    return false;
+                if (i + j >= N)
+                    return false;
+            }
+        }
+        if (i >= N)
+            return true;
+        else
+            return b;
+    }
+----------------------------------------------------
+
+Find the minimum and maximum element in an array
+----------------------------------------------------
+static int getMin(int arr[], int i, int n)
+{
+    // If there is single element, return it.
+    // Else return minimum of first element and
+    // minimum of remaining array.
+    return (n == 1) ? arr[i] : Math.min(arr[i],
+                        getMin(arr,i + 1 , n - 1));
+}
+
+static int getMax(int arr[], int i, int n)
+{
+    // If there is single element, return it.
+    // Else return maximum of first element and
+    // maximum of remaining array.
+    return (n == 1) ? arr[i] : Math.max(arr[i],
+                         getMax(arr ,i + 1, n - 1));
+}
+
+----------------------------------------------------
+Write a program to reverse the array (arr,0,len)
+----------------------------------------------------
+  static void rvereseArray(int arr[], int start, int end)
+    {
+        int temp;
+        if (start >= end)
+            return;
+        temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        rvereseArray(arr, start+1, end-1);
+    }
+
+----------------------------------------------------
+Write a program to sort the given array
+----------------------------------------------------
+Pseudo Code for recursive QuickSort function :
+
+static int partition(int[] arr, int low, int high)
+{
+
+    // pivot
+    int pivot = arr[high];
+
+    // Index of smaller element and
+    // indicates the right position
+    // of pivot found so far
+    int i = (low - 1);
+
+    for(int j = low; j <= high - 1; j++)
+    {
+
+        // If current element is smaller
+        // than the pivot
+        if (arr[j] < pivot)
+        {
+
+            // Increment index of
+            // smaller element
+            i++;
+            swap(arr, i, j);
+        }
+    }
+    swap(arr, i + 1, high);
+    return (i + 1);
+}
+/* low  --> Starting index,  high  --> Ending index */
+quickSort(arr[], low, high)
+{
+    if (low < high)
+    {
+        /* pi is partitioning index, arr[pi] is now
+           at right place */
+        pi = partition(arr, low, high);
+
+        quickSort(arr, low, pi - 1);  // Before pi
+        quickSort(arr, pi + 1, high); // After pi
+    }
+}
+----------------------------------------------------
+Find the Kth largest and Kth smallest number in an array
+----------------------------------------------------
+void maxHeapify(int i)
+    {
+      int l = left(i);
+      int r = right(i);
+      int largest = i;
+      if (l < heap_size && harr[l] > harr[i])
+        largest = l;
+      if (r < heap_size && harr[r] > harr[largest])
+        largest = r;
+      if (largest != i)
+      {
+        int t = harr[i];
+        harr[i] = harr[largest];
+        harr[largest] = t;
+        maxHeapify(largest);
+      }
+    }
+  };
+
+  // Function to return k'th largest element in a given array
+  int kthSmallest(int arr[], int n, int k)
+  {
+
+    // Build a heap of first k elements: O(k) time
+    MaxHeap mh = new MaxHeap(arr, k);
+
+    // Process remaining n-k elements.  If current element is
+    // smaller than root, replace root with current element
+    for (int i = k; i < n; i++)
+      if (arr[i] < mh.getMax())
+        mh.replaceMax(arr[i]);
+
+    // Return root
+    return mh.getMax();
+
+  }
+----------------------------------------------------
+Find the occurrence of an integer in the array
+----------------------------------------------------
+static void countFreq(int a[], int n)
+   {
+        // Insert elements and their
+        // frequencies in hash map.
+        for (int i=0; i<n; i++)
+            if (hm.containsKey(a[i]) )
+                hm.put(a[i], hm.get(a[i]) + 1);
+            else hm.put(a[i] , 1);
+    }
+
+----------------------------------------------------
+Sort the array of 0s, 1s, and 2s
+----------------------------------------------------
+ static void sortArr(int arr[], int n)
+    {
+        int i, cnt0 = 0, cnt1 = 0, cnt2 = 0;
+
+        // Count the number of 0s, 1s and 2s in the array
+        for (i = 0; i < n; i++) {
+            switch (arr[i]) {
+            case 0:
+                cnt0++;
+                break;
+            case 1:
+                cnt1++;
+                break;
+            case 2:
+                cnt2++;
+                break;
+            }
+        }
+
+        // Update the array
+        i = 0;
+
+        // Store all the 0s in the beginning
+        while (cnt0 > 0) {
+            arr[i++] = 0;
+            cnt0--;
+        }
+
+        // Then all the 1s
+        while (cnt1 > 0) {
+            arr[i++] = 1;
+            cnt1--;
+        }
+
+        // Finally all the 2s
+        while (cnt2 > 0) {
+            arr[i++] = 2;
+            cnt2--;
+        }
+    }
+----------------------------------------------------
+Range and Coffiecient of array
+----------------------------------------------------
+Range = Max – Min
+Coefficient of Range = (Max – Min) / (Max + Min)
+
+
+----------------------------------------------------
+Move all the negative elements to one side of the array
+----------------------------------------------------
+by using a two-pointer or two-variable approach where we simply take two variables like left and right which hold the 0 and N-1 indexes. Just need to check that :
+
+Check If the left and right pointer elements are negative then simply increment the left pointer.
+Otherwise, if the left element is positive and the right element is negative then simply swap the elements, and simultaneously increment and decrement the left and right pointers.
+Else if the left element is positive and the right element is also positive then simply decrement the right pointer.
+Repeat the above 3 steps until the left pointer ≤ right pointer.
+
+
+static void shiftall(int[] arr, int left,
+                     int right)
+{
+
+    // Loop to iterate over the
+    // array from left to the right
+    while (left <= right)
+    {
+
+        // Condition to check if the left
+        // and the right elements are
+        // negative
+        if (arr[left] < 0 && arr[right] < 0)
+            left++;
+
+        // Condition to check if the left
+        // pointer element is positive and
+        // the right pointer element is negative
+        else if (arr[left] > 0 && arr[right] < 0)
+        {
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+
+        // Condition to check if both the
+        // elements are positive
+        else if (arr[left] > 0 && arr[right] > 0)
+            right--;
+        else
+        {
+            left++;
+            right--;
+        }
+    }
+}
+----------------------------------------------------
+Find the Union and Intersection of the two sorted arrays
+----------------------------------------------------
+static void printIntersection(int arr1[], int arr2[], int m, int n)
+    {
+        int i = 0, j = 0;
+        while (i < m && j < n) {
+            if (arr1[i] < arr2[j])
+                i++;
+            else if (arr2[j] < arr1[i])
+                j++;
+            else {
+                System.out.print(arr2[j++] + " ");
+                i++;
+            }
+        }
+    }
