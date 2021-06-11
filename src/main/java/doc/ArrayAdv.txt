@@ -1,0 +1,40 @@
+Write a program to cyclically rotate an array by one
+-------------------------------------------------------
+        static void rotate()
+        {
+            int i = 0, j = arr.length - 1;
+            while(i != j)
+            {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
+            }
+        }
+
+Find the missing integer
+
+Approach: The length of the array is n-1. So the sum of all n elements, i.e sum of numbers from 1 to n can be calculated using the formula n*(n+1)/2. Now find the sum of all the elements in the array and subtract it from the sum of first n natural numbers, it will be the value of the missing element.
+Algorithm:
+Calculate the sum of first n natural numbers as sumtotal= n*(n+1)/2
+Create a variable sum to store the sum of array elements.
+Traverse the array from start to end.
+Update the value of sum as sum = sum + array[i]
+Print the missing number as sumtotal – sum
+
+
+Count Pairs with given sum
+        hashmap with key and its count
+
+Find duplicates in an array
+
+Sort an Array using Quicksort algorithm
+Find common elements in three sorted arrays
+Find the first repeating element in an array of integers
+Find the first non-repeating element in a given array of integers
+Find the largest three elements in an array Time
+Rearrange the array in alternating positive and negative items
+Find if there is any subarray with sum equal to zero
+Find Largest sum contiguous Subarray
+Find the factorial of a large number
+Find Maximum Product Subarray
