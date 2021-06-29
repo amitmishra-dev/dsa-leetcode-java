@@ -35,8 +35,6 @@ public class checkParenthesisWitStar {
                     }
                     else
                         return false;
-
-
                 }
             }
             return true;
