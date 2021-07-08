@@ -3,7 +3,7 @@ package competetive;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class dream11Q2 {
+public class dream11Q_findSmallestDivisor {
 
     /**
      *      * Complete the 'findSmallestDivisor' function below.

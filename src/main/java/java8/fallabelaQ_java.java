@@ -1,4 +1,4 @@
-package competetive;
+package java8;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class fallabelaQ {
+public class fallabelaQ_java {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

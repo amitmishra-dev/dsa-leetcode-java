@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * 1
  * 1
  */
-public class dream11Q {
+public class dream11_findSubsequence {
 
     public static List<Integer> findSubsequence(List<Integer> arr) {
         // Write your code here

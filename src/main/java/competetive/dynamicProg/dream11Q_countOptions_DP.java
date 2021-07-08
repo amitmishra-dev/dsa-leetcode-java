@@ -1,9 +1,9 @@
-package competetive;
+package competetive.dynamicProg;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class dream11Q3 {
+public class dream11Q_countOptions_DP {
 
     /**
      * https://leetcode.com/discuss/interview-question/533794/create-k-group-using-n-members

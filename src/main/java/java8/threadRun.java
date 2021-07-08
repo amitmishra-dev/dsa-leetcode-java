@@ -1,4 +1,4 @@
-package competetive;
+package java8;
 
 public class threadRun implements Runnable {
 
