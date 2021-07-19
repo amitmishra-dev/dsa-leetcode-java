@@ -1,0 +1,27 @@
+
+/* Write your PL/SQL query statement below
+https://leetcode.com/problems/combine-two-tables/submissions/
+*/
+select p.FirstName, p.LastName, a.City, a.State from Person p
+left outer join Address a
+on p.PersonId=a.PersonId;
+
+/* Write your PL/SQL query statement below
+ https://leetcode.com/problems/second-highest-salary/submissions/
+ */
+select max(Salary) as SecondHighestSalary from Employee
+where Salary not in(
+    select max(Salary) from Employee
+)
+
+
+SELECT DISTINCT Salary FROM Employee ORDERs BY Salary DESC LIMIT 1 OFFSET N-1
+
+# https://leetcode.com/problems/department-highest-salary/solution/
+# Write your MySQL query statement below
+select d.Name as Department, e.Name as Employee, Salary  from  Employee e inner join Department d
+on e.DepartmentId=d.Id
+where (e.DepartmentId, e.Salary) in
+(   select DepartmentId , max(Salary) from Employee
+    group by DepartmentId
+);

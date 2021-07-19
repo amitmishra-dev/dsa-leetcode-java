@@ -19,15 +19,12 @@ public class DiskSpaceAnanlysis {
     public static int segment(int x, List<Integer> space) {
         // Write your code here
         int n= space.size();
-
         for(int i=0; i < n-x+1; i++){
             int min= Integer.MAX_VALUE;
             for(int j=i; j<i+x; j++){
                 if(space.get(j) < min){
                     min=space.get(j);
-
                 }
-
             }
             pq.offer(min);
         }
