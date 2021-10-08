@@ -1,6 +1,5 @@
 package competetive.dynamicProg;
 
-import jdk.nashorn.internal.runtime.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
