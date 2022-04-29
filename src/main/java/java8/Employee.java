@@ -1,5 +1,6 @@
 package java8;
 
+import java.util.List;
 import java.util.Objects;
 
 enum Gender {
@@ -12,12 +13,21 @@ public class Employee {
     private String name;
     private  int age;
     private long salary;
+    private List<Address> addressList;
 
     public Employee(int id, String name, int age, long salary) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.salary = salary;
+    }
+
+    public Employee(int id, String name, int age, long salary, List<Address> addressList) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        this.addressList = addressList;
     }
 
     public int getId() {
@@ -63,18 +73,27 @@ public class Employee {
                 name.equals(employee.name);
     }
 
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name, age, salary);
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
+    @Override public String toString() {
+        final StringBuilder sb = new StringBuilder("Employee{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(", salary=").append(salary);
+        sb.append(", addressList=").append(addressList);
+        sb.append('}');
+        return sb.toString();
     }
 }
