@@ -1,5 +1,7 @@
 package java8;
 
+import java.util.Objects;
+
 public class Address {
     private int phone;
     private String street;
@@ -7,6 +9,19 @@ public class Address {
     public Address(int phone, String street) {
         this.phone = phone;
         this.street = street;
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Address))
+            return false;
+        Address address = (Address) o;
+        return phone == address.phone && Objects.equals(street, address.street);
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(phone, street);
     }
 
     public int getPhone() {
