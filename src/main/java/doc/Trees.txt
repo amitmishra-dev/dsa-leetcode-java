@@ -42,7 +42,6 @@ Calculate height of a binary tree | Iterative & Recursive
 
 Iterate given Binary Tree | Iterative & Recursive
 
-
 	Non Recursive
 	void iterate()
     {
