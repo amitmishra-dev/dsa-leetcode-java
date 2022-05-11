@@ -2,8 +2,11 @@ package competetive;
 
 public class WatchClock {
     public static void main(String[] args) {
-        angleClock(12,30);
+
+        System.out.println(angleClock(12,30));
     }
+    
+    
     public static double angleClock(int hour, int minutes) {
 
         double perHour= 30;

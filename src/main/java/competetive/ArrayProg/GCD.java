@@ -2,7 +2,7 @@ package competetive.ArrayProg;
 
 public class GCD {
     public static void main(String[] args) {
-        System.out.println(printGCDRec(36,24));
+        System.out.println(printGCD(36,24));
     }
 
     private static int printGCD(int m, int n) {
