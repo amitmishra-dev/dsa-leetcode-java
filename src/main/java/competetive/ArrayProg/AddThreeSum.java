@@ -1,4 +1,4 @@
-package AlgoExpert;
+package competetive.ArrayProg;
 
 import java.util.ArrayList;
 import java.util.List;

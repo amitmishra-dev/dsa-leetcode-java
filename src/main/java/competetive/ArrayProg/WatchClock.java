@@ -1,4 +1,4 @@
-package competetive;
+package competetive.ArrayProg;
 
 public class WatchClock {
     public static void main(String[] args) {
@@ -6,7 +6,7 @@ public class WatchClock {
         System.out.println(angleClock(12,30));
     }
     
-    
+
     public static double angleClock(int hour, int minutes) {
 
         double perHour= 30;

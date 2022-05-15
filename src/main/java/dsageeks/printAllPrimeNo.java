@@ -28,6 +28,6 @@ public class printAllPrimeNo {
                 System.out.println(i);
             }
         }
-        System.out.println(Long.MAX_VALUE);//max 19 length for 64 bit machine
+       // System.out.println(Long.MAX_VALUE);//max 19 length for 64 bit machine
     }
 }

@@ -1,0 +1,1108 @@
+package SystemDesign.DSA_doc;                         Binary Tree
+                 ============================
+Check if two given binary trees are identical or not | Iterative & Recursive
+
+	boolean identicalTrees(Node a, Node b) 
+    {
+        /*1. both empty */
+        if (a == null && b == null)
+            return true;
+             
+        /* 2. both non-empty -> compare them */
+        if (a != null && b != null) 
+            return (a.data == b.data
+                    && identicalTrees(a.left, b.left)
+                    && identicalTrees(a.right, b.right));
+  
+        /* 3. one empty, one not -> false */
+        return false;
+    }
+============================
+
+Calculate height of a binary tree | Iterative & Recursive
+	int maxDepth(Node node) 
+    {
+        if (node == null)
+            return 0;
+        else
+        {
+            /* compute the depth of each subtree */
+            int lDepth = maxDepth(node.left);
+            int rDepth = maxDepth(node.right);
+  
+            /* use the larger one */
+            if (lDepth > rDepth)
+                return (lDepth + 1);
+             else
+                return (rDepth + 1);
+        }
+    }
+
+============================
+
+Iterate given Binary Tree | Iterative & Recursive
+
+	Non Recursive
+	void iterate()
+    {
+        // Base Case
+        if (root == null)
+            return;
+ 
+        // Create an empty queue for level order traversal
+        Queue<Node> q = new LinkedList<Node>();
+ 
+        // Do level order traversal starting from root
+        q.add(root);
+        while (!q.isEmpty()) 
+        {
+            Node node = q.peek();
+            q.poll();
+ 
+            if (node.left != null)
+                q.add(node.left);
+            if (node.right != null)
+                q.add(node.right);
+        }
+    }
+============================
+
+/* Class to print the left view */ (level and maxlevel)
+class BinaryTree
+{
+    Node root;
+    static int  max_level = 0;
+ 
+    // recursive function to print left view
+    void leftViewUtil(Node node, int level)
+    {
+        // Base Case
+        if (node==null) return;
+ 
+        // If this is the first node of its level
+        if (max_level < level)
+        {
+            System.out.print(" " + node.data);
+            max_level = level;
+        }
+ 
+        // Recur for left and right subtrees
+        leftViewUtil(node.left, level+1);
+        leftViewUtil(node.right, level+1);
+    }
+============================
+
+Print Bottom View of Binary Tree
+class Node
+{
+    int data; //data of the node
+    int hd; //horizontal distance of the node
+    Node left, right; //left and right references
+ 
+    // Constructor of tree node
+    public Node(int key)
+    {
+        data = key;
+        hd = Integer.MAX_VALUE;
+        left = right = null;
+    }
+}
+
+
+//Tree class
+class Tree
+{
+    Node root; //root node of tree
+ 
+    // Default constructor
+    public Tree() {}
+ 
+    // Parameterized tree constructor
+    public Tree(Node node)
+    {
+        root = node;
+    }
+ 
+    // Method that prints the bottom view.
+    public void bottomView()
+    {
+        if (root == null)
+            return;
+ 
+        // Initialize a variable 'hd' with 0 for the root element.
+        int hd = 0;
+ 
+        // TreeMap which stores key value pair sorted on key value
+        Map<Integer, Integer> map = new TreeMap<>();
+ 
+         // Queue to store tree nodes in level order traversal
+        Queue<Node> queue = new LinkedList<Node>();
+ 
+        // Assign initialized horizontal distance value to root
+        // node and add it to the queue.
+        root.hd = hd;
+        queue.add(root);
+ 
+        // Loop until the queue is empty (standard level order loop)
+        while (!queue.isEmpty())
+        {
+            Node temp = queue.remove();
+ 
+            // Extract the horizontal distance value from the
+            // dequeued tree node.
+            hd = temp.hd;
+ 
+            // Put the dequeued tree node to TreeMap having key
+            // as horizontal distance. Every time we find a node
+            // having same horizontal distance we need to replace
+            // the data in the map.
+            map.put(hd, temp.data);
+ 
+            // If the dequeued node has a left child add it to the
+            // queue with a horizontal distance hd-1.
+            if (temp.left != null)
+            {
+                temp.left.hd = hd-1;
+                queue.add(temp.left);
+            }
+            // If the dequeued node has a left child add it to the
+            // queue with a horizontal distance hd+1.
+            if (temp.right != null)
+            {
+                temp.right.hd = hd+1;
+                queue.add(temp.right);
+            }
+        }
+ 
+        // Extract the entries of map into a set to traverse
+        // an iterator over that.
+        Set<Entry<Integer, Integer>> set = map.entrySet();
+ 
+        // Make an iterator
+        Iterator<Entry<Integer, Integer>> iterator = set.iterator();
+ 
+        // Traverse the map elements using the iterator.
+        while (iterator.hasNext())
+        {
+            Map.Entry<Integer, Integer> me = iterator.next();
+            System.out.print(me.getValue()+" ");
+        }
+    }
+}
+============================
+
+Print Top View of Binary Tree
+public void printTopView()
+    {
+        // base case
+        if (root == null) {  return;  }
+ 
+        // Creates an empty hashset
+        HashSet<Integer> set = new HashSet<>();
+ 
+        // Create a queue and add root to it
+        Queue<QItem> Q = new LinkedList<QItem>();
+        Q.add(new QItem(root, 0)); // Horizontal distance of root is 0
+ 
+        // Standard BFS or level order traversal loop
+        while (!Q.isEmpty())
+        {
+            // Remove the front item and get its details
+            QItem qi = Q.remove();
+            int hd = qi.hd;
+            TreeNode n = qi.node;
+ 
+            // If this is the first node at its horizontal distance,
+            // then this node is in top view
+            if (!set.contains(hd))
+            {
+                set.add(hd);
+                System.out.print(n.key + " ");
+            }
+ 
+            // Enqueue left and right children of current node
+            if (n.left != null)
+                Q.add(new QItem(n.left, hd-1));
+            if (n.right != null)
+                Q.add(new QItem(n.right, hd+1));
+        }
+    }
+}
+============================
+Find next node in same level for given node in a binary tree
+// Function to find next node of given node in the same level 
+// in given binary tree
+Node* findRightNode(Node* root, int val)
+{
+    // return null if tree is empty
+	if (root == nullptr)
+		return nullptr;
+
+    // create an empty queue and enqueue root node
+	list<Node*> queue;
+	queue.push_back(root);
+
+    // pointer to store current node
+	Node* front = nullptr;
+
+    // run till queue is not empty
+	while (!queue.empty())
+	{
+		// calculate number of nodes in current level
+		int size = queue.size();
+
+		// process every node of current level and enqueue their
+		// non-empty left and right child to queue
+		while (size--)
+		{
+			front = queue.front();
+			queue.pop_front();
+
+			// if desired node is found, return its next right node
+			if (front->key == val)
+			{
+				// if next right node doesn't exists, return null
+			    if (queue.empty())
+                    return nullptr;
+			    return queue.front();
+			}
+
+			if (front->left)
+				queue.push_back(front->left);
+
+			if (front->right)
+				queue.push_back(front->right);
+		}
+	}
+
+	return nullptr;
+}
+============================
+
+Check if given binary tree is complete binary tree or not
+  /* Given a binary tree, return true if the tree is complete
+       else false */
+    static boolean isCompleteBT(Node root)
+    {
+        // Base Case: An empty tree is complete Binary Tree
+        if(root == null)
+            return true;
+         
+        // Create an empty queue
+        Queue<Node> queue =new LinkedList<>();
+         
+        // Create a flag variable which will be set true
+        // when a non full node is seen
+        boolean flag = false;
+         
+        // Do level order traversal using queue.
+        queue.add(root);
+        while(!queue.isEmpty())
+        {
+            Node temp_node = queue.remove();
+             
+            /* Check if left child is present*/
+            if(temp_node.left != null)
+            {
+                 // If we have seen a non full node, and we see a node
+                 // with non-empty left child, then the given tree is not
+                 // a complete Binary Tree
+                if(flag == true)
+                    return false;
+                 
+                 // Enqueue Left Child
+                queue.add(temp_node.left);
+            }
+            // If this a non-full node, set the flag as true
+            else
+                flag = true;
+             
+            /* Check if right child is present*/
+            if(temp_node.right != null)
+            {
+                // If we have seen a non full node, and we see a node
+                // with non-empty right child, then the given tree is not
+                // a complete Binary Tree
+                if(flag == true)
+                    return false;
+                 
+                // Enqueue Right Child
+                queue.add(temp_node.right);
+                 
+            }
+            // If this a non-full node, set the flag as true
+            else
+                flag = true;
+        }
+         // If we reach here, then the tree is complete Bianry Tree
+        return true;
+    }
+============================
+
+Determine if given two nodes are cousins of each other
+  // Recursive function to check if two Nodes are
+    // siblings
+    boolean isSibling(Node node, Node a, Node b)
+    {
+        // Base case
+        if (node == null)
+            return false;
+ 
+        return ((node.left == a && node.right == b) ||
+                (node.left == b && node.right == a) ||
+                isSibling(node.left, a, b) ||
+                isSibling(node.right, a, b));
+    }
+ 
+    // Recursive function to find level of Node 'ptr' in
+    // a binary tree
+    int level(Node node, Node ptr, int lev)
+    {
+        // base cases
+        if (node == null)
+            return 0;
+ 
+        if (node == ptr)
+            return lev;
+ 
+        // Return level if Node is present in left subtree
+        int l = level(node.left, ptr, lev + 1);
+        if (l != 0)
+            return l;
+ 
+        // Else search in right subtree
+        return level(node.right, ptr, lev + 1);
+    }
+ 
+    // Returns 1 if a and b are cousins, otherwise 0
+    boolean isCousin(Node node, Node a, Node b)
+    {
+        // 1. The two Nodes should be on the same level
+        //       in the binary tree.
+        // 2. The two Nodes should not be siblings (means
+        //    that they should not have the same parent
+        //    Node).
+        return ((level(node, a, 1) == level(node, b, 1)) &&
+                (!isSibling(node, a, b)));
+    }
+============================
+
+Determine if given binary tree is a subtree of another binary tree or not
+    /* A utility function to check whether trees with roots as root1 and
+       root2 are identical or not */
+    boolean areIdentical(Node root1, Node root2) 
+    {
+  
+        /* base cases */
+        if (root1 == null && root2 == null)
+            return true;
+  
+        if (root1 == null || root2 == null)
+            return false;
+  
+        /* Check if the data of both roots is same and data of left and right
+           subtrees are also same */
+        return (root1.data == root2.data
+                && areIdentical(root1.left, root2.left)
+                && areIdentical(root1.right, root2.right));
+    }
+  
+    /* This function returns true if S is a subtree of T, otherwise false */
+    boolean isSubtree(Node T, Node S) 
+    {
+        /* base cases */
+        if (S == null) 
+            return true;
+  
+        if (T == null)
+            return false;
+  
+        /* Check the tree with root as current node */
+        if (areIdentical(T, S)) 
+            return true;
+  
+        /* If the tree with root as current node doesn't match then
+           try left and right subtrees one by one */
+        return isSubtree(T.left, S)
+                || isSubtree(T.right, S);
+    }
+============================
+Find diameter of a binary tree
+ int diameter(Node root)
+    {
+        /* base case if tree is empty */
+        if (root == null)
+            return 0;
+ 
+        /* get the height of left and right sub trees */
+        int lheight = height(root.left);
+        int rheight = height(root.right);
+ 
+        /* get the diameter of left and right subtrees */
+        int ldiameter = diameter(root.left);
+        int rdiameter = diameter(root.right);
+ 
+        /* Return max of following three
+          1) Diameter of left subtree
+         2) Diameter of right subtree
+         3) Height of left subtree + height of right subtree + 1 */
+        return Math.max(lheight + rheight + 1,
+                        Math.max(ldiameter, rdiameter));
+    }
+============================
+
+Check if given binary Tree has symmetric structure or not
+// Returns true if trees with roots as root1 and root2 are mirror
+bool isMirror(struct Node *root1, struct Node *root2)
+{
+    // If both trees are emptu, then they are mirror images
+    if (root1 == NULL && root2 == NULL)
+        return true;
+ 
+    // For two trees to be mirror images, the following three
+    // conditions must be true
+    // 1 - Their root node's key must be same
+    // 2 - left subtree of left tree and right subtree
+    //      of right tree have to be mirror images
+    // 3 - right subtree of left tree and left subtree
+    //      of right tree have to be mirror images
+    if (root1 && root2 && root1->key == root2->key)
+        return isMirror(root1->left, root2->right) &&
+               isMirror(root1->right, root2->left);
+ 
+    // if neither of above conditions is true then root1
+    // and root2 are not mirror images
+    return false;
+}
+============================
+
+Convert binary tree to its mirror
+    Node mirror(Node node)
+    {
+        if (node == null)
+            return node;
+ 
+        /* do the subtrees */
+        Node left = mirror(node.left);
+        Node right = mirror(node.right);
+ 
+        /* swap the left and right pointers */
+        node.left = right;
+        node.right = left;
+ 
+        return node;
+    }
+============================
+
+Print all paths from root to leaf nodes in given binary tree
+    /* Recursive helper function -- given a node, and an array
+       containing the path from the root node up to but not 
+       including this node, print out all the root-leaf paths.*/
+    void printPathsRecur(Node node, int path[], int pathLen) 
+    {
+        if (node == null)
+            return;
+  
+        /* append this node to the path array */
+        path[pathLen] = node.data;
+        pathLen++;
+  
+        /* it's a leaf, so print the path that led to here  */
+        if (node.left == null && node.right == null)
+            printArray(path, pathLen);
+        else
+        {
+            /* otherwise try both subtrees */
+            printPathsRecur(node.left, path, pathLen);
+            printPathsRecur(node.right, path, pathLen);
+        }
+    }
+============================
+
+/* An iterative function to do preorder traversal
+   of binary tree  and print root to leaf path
+   without using recursion */
+void printRootToLeaf(Node* root)
+{
+    // Corner Case
+    if (root == NULL)
+        return;
+ 
+    // Create an empty stack and push root to it
+    stack<Node*> nodeStack;
+    nodeStack.push(root);
+ 
+    // Create a map to store parent pointers of binary
+    // tree nodes
+    map<Node*, Node*> parent;
+ 
+    // parent of root is NULL
+    parent[root] = NULL;
+ 
+    /* Pop all items one by one. Do following for
+       every popped item
+        a) push its right child and set its parent
+           pointer
+        b) push its left child and set its parent
+           pointer
+       Note that right child is pushed first so that
+       left is processed first */
+    while (!nodeStack.empty())
+    {
+        // Pop the top item from stack
+        Node* current = nodeStack.top();
+        nodeStack.pop();
+ 
+        // If leaf node encountered, print Top To
+        // Bottom path
+        if (!(current->left) && !(current->right))
+            printTopToBottomPath(current, parent);
+ 
+        // Push right & left children of the popped node
+        // to stack. Also set their parent pointer in
+        // the map
+        if (current->right)
+        {
+            parent[current->right] = current;
+            nodeStack.push(current->right);
+        }
+        if (current->left)
+        {
+            parent[current->left] = current;
+            nodeStack.push(current->left);
+        }
+    }
+}
+============================
+
+Find ancestors of given node in a Binary Tree
+    /* If target is present in tree, then prints the ancestors
+       and returns true, otherwise returns false. */
+    boolean printAncestors(Node node, int target) 
+    {
+         /* base cases */
+        if (node == null)
+            return false;
+  
+        if (node.data == target)
+            return true;
+  
+        /* If target is present in either left or right subtree 
+           of this node, then print this node */
+        if (printAncestors(node.left, target)
+                || printAncestors(node.right, target)) 
+        {
+            System.out.print(node.data + " ");
+            return true;
+        }
+  
+        /* Else return false */
+        return false;
+    }
+============================
+  
+Print nodes in vertical order of a given Binary Tree (Vertical Traversal)
+    // Utility function to store vertical order in map 'm'
+    // 'hd' is horizontal distance of current node from root.
+    // 'hd' is initially passed as 0
+    static void getVerticalOrder(Node root, int hd,
+                                TreeMap<Integer,Vector<Integer>> m)
+    {
+        // Base case
+        if(root == null)
+            return;
+         
+        //get the vector list at 'hd'
+        Vector<Integer> get =  m.get(hd);
+         
+        // Store current node in map 'm'
+        if(get == null)
+        {
+            get = new Vector<>();
+            get.add(root.key);
+        }
+        else
+            get.add(root.key);
+         
+        m.put(hd, get);
+         
+        // Store nodes in left subtree
+        getVerticalOrder(root.left, hd-1, m);
+         
+        // Store nodes in right subtree
+        getVerticalOrder(root.right, hd+1, m);
+    }
+     
+    // The main function to print vertical oder of a binary tree
+    // with given root
+    static void printVerticalOrder(Node root)
+    {
+        // Create a map and store vertical oder in map using
+        // function getVerticalOrder()
+        TreeMap<Integer,Vector<Integer>> m = new TreeMap<>();
+        int hd =0;
+        getVerticalOrder(root,hd,m);
+         
+        // Traverse the map and print nodes at every horigontal
+        // distance (hd)
+        for (Entry<Integer, Vector<Integer>> entry : m.entrySet())
+        {
+            System.out.println(entry.getValue());
+        }
+    }
+============================
+    
+Print Diagonal Traversal of Binary Tree
+    /* root - root of the binary tree
+       d -  distance of current line from rightmost
+            -topmost slope.
+       diagonalPrint - HashMap to store Diagonal
+                       elements (Passed by Reference) */
+    static void diagonalPrintUtil(Node root,int d,
+            HashMap<Integer,Vector<Integer>> diagonalPrint){
+         
+         // Base case
+        if (root == null)
+            return;
+         
+        // get the list at the particular d value
+        Vector<Integer> k = diagonalPrint.get(d);
+         
+        // k is null then create a vector and store the data
+        if (k == null)
+        {
+            k = new Vector<>();
+            k.add(root.data);
+        }
+         
+        // k is not null then update the list
+        else
+        {
+            k.add(root.data);
+        }
+         
+        // Store all nodes of same line together as a vector
+        diagonalPrint.put(d,k);
+         
+        // Increase the vertical distance if left child
+        diagonalPrintUtil(root.left, d + 1, diagonalPrint);
+          
+        // Vertical distance remains same for right child
+        diagonalPrintUtil(root.right, d, diagonalPrint);
+    }
+     
+    // Print diagonal traversal of given binary tree
+    static void diagonalPrint(Node root)
+    {
+        // create a map of vectors to store Diagonal elements
+        HashMap<Integer,Vector<Integer>> diagonalPrint = new HashMap<>();
+        diagonalPrintUtil(root, 0, diagonalPrint);
+         
+        System.out.println("Diagonal Traversal of Binnary Tree");
+        for (Entry<Integer, Vector<Integer>> entry : diagonalPrint.entrySet())
+        {
+            System.out.println(entry.getValue());
+        }
+    }
+============================
+
+Find maximum sum root-to-leaf path in a binary tree
+// A utility function to find the maximum sum between any
+    // two leaves.This function calculates two values:
+    // 1) Maximum path sum between two leaves which is stored
+    //    in res.
+    // 2) The maximum root to leaf path sum which is returned.
+    // If one side of root is empty, then it returns INT_MIN
+    int maxPathSumUtil(Node node, Res res) {
+
+        // Base cases
+        if (node == null)
+            return 0;
+        if (node.left == null && node.right == null)
+            return node.data;
+
+        // Find maximum sum in left and right subtree. Also
+        // find maximum root to leaf sums in left and right
+        // subtrees and store them in ls and rs
+        int ls = maxPathSumUtil(node.left, res);
+        int rs = maxPathSumUtil(node.right, res);
+
+        // If both left and right children exist
+        if (node.left != null && node.right != null) {
+
+            // Update result if needed
+            res.val = Math.max(res.val, ls + rs + node.data);
+
+            // Return maxium possible value for root being
+            // on one side
+            return Math.max(ls, rs) + node.data;
+        }
+
+        // If any of the two children is empty, return
+        // root sum for root being on one side
+        return (node.left == null) ? rs + node.data
+                : ls + node.data;
+    }
+
+    // The main function which returns sum of the maximum
+    // sum path between two leaves. This function mainly
+    // uses maxPathSumUtil()
+    int maxPathSum(Node node)
+    {
+        Res res = new Res();
+        res.val = Integer.MIN_VALUE;
+        maxPathSumUtil(root, res);
+        return res.val;
+    }
+============================
+
+Determine if given Binary Tree is a BST or not
+   /* returns true if given search tree is binary
+     search tree (efficient version) */
+    boolean isBST()  {
+        return isBSTUtil(root, Integer.MIN_VALUE,
+                               Integer.MAX_VALUE);
+    }
+ 
+    /* Returns true if the given tree is a BST and its
+      values are >= min and <= max. */
+    boolean isBSTUtil(Node node, int min, int max)
+    {
+        /* an empty tree is BST */
+        if (node == null)
+            return true;
+ 
+        /* false if this node violates the min/max constraints */
+        if (node.data < min || node.data > max)
+            return false;
+ 
+        /* otherwise check the subtrees recursively
+        tightening the min/max constraints */
+        // Allow only distinct values
+        return (isBSTUtil(node.left, min, node.data-1) &&
+                isBSTUtil(node.right, node.data+1, max));
+    }
+============================
+Next pointer which connect every level nodes
+
+	public void ConnectNode(NodeConnect node,NodeConnect nextlevelleftMostNode) {
+		
+		//nextlevelleftMostNode will be the nextlevelleftMostNode for the current level
+		//Base case 
+		if(node == null) {
+			return;
+		}
+
+        // set the next pointer for node's left child 
+		if (node.leftChild != null) 
+			node.leftChild.nextPointer=node.rightChild;
+		// set the next pointer for node's right child
+		if (node.nextPointer!=null) {
+			/*while setting the next pointer for node's right child if parent next pointer is not null it means level is not changing ,at that moment set the
+			next pointer for node's right child as parent nextPointer leftchild.*/
+			if (node.rightChild != null) 
+			    node.rightChild.nextPointer= node.nextPointer.leftChild;
+		} else {
+			/*while setting the next pointer for node's right child if parent next pointer will be null it means level is changing ,at that moment set the
+			parent next as the leftmost node of the current level.*/
+			node.nextPointer = nextlevelleftMostNode;
+		}
+		
+		//set nextRight for other child in preorder fashion
+		if (node.leftChild != null) 
+		ConnectNode(node.leftChild,nextlevelleftMostNode.leftChild);
+		if (node.rightChild != null) 
+		ConnectNode(node.rightChild,nextlevelleftMostNode.leftChild);
+	}  
+================================
+private static void SpiralLevelOrder(node root) {
+		Deque<node> q = new LinkedList<>();
+		q.add(root);
+		boolean flag=true;
+		while(!q.isEmpty()){
+			int size=q.size();
+			if(flag){
+				while(size!=0){
+					root= q.poll();
+					System.out.print(root.data+" ");
+					if(root.left!= null)
+						q.add(root.left);
+					if(root.right!= null)
+						q.add(root.right);
+					size--;
+				}
+			}
+			if(!flag){
+				while(size!=0){
+					root= q.pollLast();
+					System.out.print(root.data+" ");
+					if(root.right!= null)
+						q.addFirst(root.right);
+					if(root.left!= null)
+						q.addFirst(root.left);
+					size--;
+					}
+			}
+			flag=!flag;
+		}
+	}
+================================
+class node{
+	int val;
+	node left , right;
+	node(int val){
+		this.val = val;
+		left = right = null;
+	}
+}
+public class treeProg {
+	public static void main(String[] args) {
+	
+		node node= new node(100);
+		node.left= new node(50);
+		node.left.left= new node(20);
+		node.left.right= new node(80);
+		node.left.left.left= new node(10);
+		node.right= new node(150);
+		node.right.right= new node(180);
+		
+		int height = heightTree(node);
+		System.out.println("height : " +height);
+
+		System.out.println("\n======Top to Bottom Level Order Recursive ");
+		for(int i= 1; i<= height;i++)
+			reverseLevelOrder(node, i);
+		
+		System.out.println("\n======Bottom to Top Level Order Recursive ");
+		for(int i= height; i> 0;i--)
+			reverseLevelOrderRec(node, i);
+	}
+
+	private static void reverseLevelOrder(node node, int height) {
+		if(node== null)
+			return;
+		
+		if(height == 1)
+			System.out.print(node.val + " ");
+		
+		reverseLevelOrder(node.left, height-1);
+		reverseLevelOrder(node.right, height-1);
+
+	}
+	private static void reverseLevelOrderRec(node node, int height) {
+		if(node== null)
+			return;
+		
+		if(height == 1)
+			System.out.print(node.val + " ");
+		
+		reverseLevelOrderRec(node.left, height-1);
+		reverseLevelOrderRec(node.right, height-1);
+
+	}
+	private static int heightTree(node node) {
+		if(node == null)
+			return 0;
+		
+		return Math.max(heightTree(node.left), heightTree(node.right)) +1;
+	}
+
+}
+================================
+    void printBoundary(Node node)  
+    { 
+        if (node != null)  
+        { 
+            System.out.print(node.data + " "); 
+            printBoundaryLeft(node.left); 
+            printLeaves(node.left); 
+            printLeaves(node.right); 
+            printBoundaryRight(node.right); 
+        } 
+    } 
+	void printLeaves(Node node)  
+    { 
+        if (node != null)  
+        { 
+            printLeaves(node.left); 
+   
+            // Print it if it is a leaf node 
+            if (node.left == null && node.right == null) 
+                System.out.print(node.data + " "); 
+            printLeaves(node.right); 
+        } 
+    } 
+    void printBoundaryLeft(Node node)  
+    { 
+        if (node != null)  
+        { 
+            if (node.left != null)  
+            { 
+                // to ensure top down order, print the node 
+                // before calling itself for left subtree 
+                System.out.print(node.data + " "); 
+                printBoundaryLeft(node.left); 
+            }  
+            else if (node.right != null)  
+            { 
+                System.out.print(node.data + " "); 
+                printBoundaryLeft(node.right); 
+            } 
+            // do nothing if it is a leaf node, this way we avoid 
+            // duplicates in output 
+        } 
+    } 
+    void printBoundaryRight(Node node)  
+    { 
+        if (node != null)  
+        { 
+            if (node.right != null)  
+            { 
+                printBoundaryRight(node.right); 
+                System.out.print(node.data + " "); 
+            }  
+            else if (node.left != null)  
+            { 
+                printBoundaryRight(node.left); 
+                System.out.print(node.data + " "); 
+            } 
+        } 
+    } 
+================================
+private static void SpiralLevelOrder(node root) {
+		Deque<node> q = new LinkedList<>();
+		
+		q.add(root);
+		boolean flag=true;
+		while(!q.isEmpty()){
+			int size=q.size();
+			
+			if(flag){
+				while(size!=0){
+					root= q.poll();
+					System.out.print(root.data+" ");
+					if(root.left!= null)
+						q.add(root.left);
+					
+					if(root.right!= null)
+						q.add(root.right);
+					size--;
+				}
+				
+			}
+			if(!flag){
+				while(size!=0){
+					root= q.pollLast();
+					System.out.print(root.data+" ");
+					if(root.right!= null)
+						q.addFirst(root.right);
+					
+					if(root.left!= null)
+						q.addFirst(root.left);
+			}
+			
+			flag=!flag;
+		}
+		
+	}
+================================
+	private static void levelOrder(node root) {
+		Queue<node> q = new LinkedList<>() ;
+		q.add(root);
+		q.add(null);
+		while(!q.isEmpty()){
+			root = q.poll();
+			//if(root.data != null)
+				
+			if(root != null){
+				System.out.print(root.data+" ");
+				if(root.left != null){
+					q.add(root.left);
+				}
+				if(root.right != null){
+					q.add(root.right);
+				}
+			}
+			else{
+				if(!q.isEmpty()){
+					q.add(null);
+					System.out.println();
+				}
+			}
+		}
+	}
+================================
+
+private static void preorderR(node root) throws InterruptedException {
+		
+		// create an empty stack
+        Stack<node> stack = new Stack();
+
+        // start from root node (set current node to root node)
+       
+
+        // if current node is null and stack is also empty, we're done
+        while (!stack.isEmpty() || root != null)
+        {
+            // if current node is not null, push it to the stack (defer it)
+            // and move to its left child
+            if (root != null)
+            {
+            	 System.out.print(root.data + " ");
+                stack.push(root);
+                root = root.left;
+            }
+            else
+            {
+                // else if current node is null, we pop an element from the stack,
+                // print it and finally set current node to its right child
+                root = stack.pop();
+               
+
+                root = root.right;
+            }
+        }
+	}
+private static void inorderR(node root) throws InterruptedException {
+		
+		// create an empty stack
+        Stack<node> s = new Stack();
+        while (!s.empty() || root != null)
+        {
+        	if(root != null){
+        		s.push(root);
+        		root =root.left;
+        	}
+        	else
+        	{
+        		root= s.pop();
+        		System.out.print(root.data +" ");
+        		root = root.right;
+        	}
+        }
+	}
+
+private static void PostOrderR(node root) throws InterruptedException {
+	
+	// create an empty stack
+    Stack<node> s = new Stack();
+    s.push(root);
+    Stack<node> out = new Stack();
+    while (!s.empty() )
+    {
+    	root = s.pop();
+    	out.push(root);
+    	
+    	if(root.left != null){
+    		s.push(root.left);
+    	}
+    	if(root.right != null){
+    		s.push(root.right);
+    	}
+    }
+    while (!out.empty() )
+    {
+    	System.out.print(out.pop().data+" ");
+    }
+}
+================================

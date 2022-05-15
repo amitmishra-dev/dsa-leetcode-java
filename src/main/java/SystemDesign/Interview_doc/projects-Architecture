@@ -1,0 +1,37 @@
+Java garbage collection log
+------------------------------
+three different heap “generations” — young generation, old generation and permanent generation
+
+
+Feature Flag
+-------------
+
+Vault Module(KV crucial secrets) - DB password - sdks keys
+-------------
+1.lDAP - user account
+2.service account token (bootstrap.yaml)- Kubernetes authentication mechanism- has vault role - -based on JWT token - developer- pass JWT token  - spring vault connect library- via kubernetes authentication
+-pod specific file has all secrets - install jetty on web server(breaking into pod) -
+-on new property added externally- fetches from vault- and do union of all KV by actuator refresh in spring base framework- @value/@property
+
+GITLAB/CI-CD - (continuous integration, continuous delivery, and continuous deployment.)
+--------------
+- continous integration - to inspect the code quality - run and build integtest - stable master
+app-check scan - sonarqube(test covg) - fortify scan
+- continuous delivery -  gradle script -publish (create jar and publish- artifactory- can use in gradle dependency)
+dockerize- deploy - k8 cluster= mspp photon image- java 11= all artifacts install- execute our service - push images to dockerhub (version with pipelineId)-
+-dev/pre-stg/stg
+-runner - register for above all stages - CentOS machine
+
+Why Oauth ?
+-----------
+- secure delegation protocol - authentication/authorization - non-fb wesites uses fb profiles- to provide some kind of services- to use big companies user bases -without steal any information-multiple cycle of Oauth in CPN
+components
+- client (CPN) - application that trying to acces user's resources- Non-fb website
+- User - resource owner
+- Authorization server (CSp/GAZ)- establish user identity - securely gives a token to client- access resource server- has two parts( Authorization E/p and Token E/P)
+- resource server (VMC)- FB api's - fetch your profile
+
+Flow
+-----
+1.user Login to client websites 2.client redirected to Authorization endpoint 3.AuthServer authenticates and provide auth code (not Token diectly )to client 4.client uses auth code and take tken from auth server 5.clent uses auth token to fetch resources from resource server.
+Authorization workflow- after step 2 - AS must have pre-registered client_id - browsers cant hold auth_code (authcode never stolen- no encrypt, use HTTPS -(middle man hack not allowed) - HTTPs is over TCP - redirected to real client with client id and auth code -

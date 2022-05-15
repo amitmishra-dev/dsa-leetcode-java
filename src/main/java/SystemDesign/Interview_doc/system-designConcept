@@ -1,0 +1,48 @@
+Approach
+---------
+1.Requirement-Who and How many users ? inputs and outputs of system? expect to handle? requests per second do we expect? expected read to write ratio?
+2.high level design-  Sketch the main components and connections
+3.Design core component -Hash collisions - SQL or NoSQL - Database schema - API and object-oriented design
+4.Scale the design - Load balancer- Horizontal scaling- Caching-Database sharding
+
+Eg:
+1.key-value cache - https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/query_cache/README.md
+
+
+
+Scaling - Vertical scaling
+          Horizontal scaling
+          Caching
+          Load balancing
+          Database replication
+          Database partitioning
+performance vs scalability:
+-If you have a performance problem, your system is slow for a single user.
+-If you have a scalability problem, your system is fast for a single user but slow under heavy load.
+
+Latency is the time to perform some action or to produce some result.
+Throughput is the number of such actions or results per unit of time.
+aim-- for maximal throughput with acceptable latency.
+
+CAP
+----
+In distributed computer system, you can only support two of the following guarantees:
+
+Consistency - Every read receives the most recent write or an error
+Availability - Every request receives a response, without guarantee that it contains the most recent version of the information
+Partition Tolerance - The system continues to operate despite arbitrary partitioning due to network failures
+
+1.CP - consistency and partition tolerance- CP is a good choice if your business needs require atomic reads and writes.
+2.AP - when the system needs to continue working despite external errors.
+
+DNS (CloudFlare and Route 53 provide managed DNS services)
+-------
+- Domain Name System (DNS) translates a domain name such as www.example.com to an IP address.
+- DNS results can also be cached by your browser or OS for a certain period of time, determined by the time to live (TTL).
+- Weighted round robin - Prevent traffic from going to servers under maintenance
+
+CDN (content delivery network)
+----------------
+globally distributed network of proxy servers, serving content from locations closer to the user.
+static files such as HTML/CSS/JS, photos, and videos are served from CDN- DNS resolution will tell clients which server to contact.
+

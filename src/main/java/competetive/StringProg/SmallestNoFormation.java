@@ -1,4 +1,4 @@
-package competetive;
+package competetive.StringProg;
 
 import java.util.Stack;
 //https://leetcode.com/problems/remove-k-digits/

@@ -1,4 +1,4 @@
-package competetive;
+package competetive.StringProg;
 
 public class shift {
 
