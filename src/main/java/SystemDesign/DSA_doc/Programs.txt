@@ -1,0 +1,381 @@
+package SystemDesign.DSA_doc;
+
+class A
+	{
+		void methodA(){}
+	}
+	
+	class B extends A{
+		void methodB() {} 
+	
+		public static void main(String[] args) {
+			
+			A a1 = new A();//true
+			A a2 = new B();//true
+			B b1 = new A();//false
+			B b2 = new B();//true
+			a1.methodA();//true
+			a1.methodB();//false
+			a2.methodA();//true
+			a2.methodB();//false
+			b1.methodA();//false
+			b1.methodB();//false
+			b2.methodA();//true
+			b2.methodB();//true
+		}
+	
+	}
+========================
+public V get(Object key) 
+{
+    if (key == null)
+       return getForNullKey();
+     int hash = hash(key.hashCode());
+     for (Entry<K,V> e = table[indexFor(hash, table.length)];e != null;e = e.next) 
+     {
+         Object k;
+         if (e.hash == hash && ((k = e.key) == key || key.equals(k)))
+             return e.value;
+     }
+         return null;
+ }
+	
+========================
+public V put(K key, V value) 
+{
+    if (key == null)
+       return putForNullKey(value);
+    int hash = hash(key.hashCode());
+    int i = indexFor(hash, table.length);
+    for (Entry<K,V> e = table[i]; e != null; e = e.next) 
+    {
+        Object k;
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) 
+         {
+             V oldValue = e.value;
+             e.value = value;
+             e.recordAccess(this);
+             return oldValue;
+          }
+     }
+     modCount++;
+     addEntry(hash, key, value, i);
+     return null;
+ }
+
+========================
+public class HashSet
+{
+
+	private transient HashMap<E,Object> map;
+	
+	// Dummy value to associate with an Object in the backing Map
+	private static final Object PRESENT = new Object();
+	
+	public HashSet() {
+	    map = new HashMap<>();
+	}
+	
+	public boolean add(E e) {
+	    return map.put(e, PRESENT)==null;
+	}
+	//In HashMap, the put(Key k,Value V) method returns:
+	//null, if the key is unique. The key will be added to the map.
+	//old value of the key, if the key is duplicated.
+
+}
+========================
+
+protected static final class Segment {
+  protected int count;
+  protected synchronized int getCount() {
+    return this.count;
+  }
+  protected synchronized void synch() {}
+}
+/** Segment Array declaration **/
+public final Segment[] segments = new Segment[32];
+PUT() {
+	synchronized (seg) {
+		  // code to add
+		  int index = hash & table.length - 1; // hash we have calculated for key and table is Entry[] table
+		  Entry first = table[index];
+		  for (Entry e = first; e != null; e = e.next) {
+		    if ((e.hash == hash) && (eq(key, e.key))) { // if key already exist means updating the value
+		      Object oldValue = e.value;
+		      e.value = value;
+		      return oldValue;
+		    }
+		  }
+		  Entry newEntry = new Entry(hash, key, value, first); // new entry, i.e. this key not exist in map
+		  table[index] = newEntry; // Putting the Entry object at calculated Index 
+	}
+========================
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + (flag ? 1231 : 1237);
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (flag != other.flag)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+========================
+
+public static int f(int n){
+    if (n <= 1)
+        return n;
+    else 
+        return f(n-1) + f(n-2);
+}
+
+static void printReversedFib(int x){
+    if(x <= 1)
+        System.out.println(f(x));
+    else{
+        System.out.println(f(x));
+        printReverseFib(x-1);
+    }
+}
+===========factorial=============
+
+int factorial(int n) {
+      if (n <= 1)
+            return 1;
+      else
+            return n * factorial(n - 1);
+}
+4! = 4 * 3 * 2 * 1 = 24
+
+============HeapDumpPath============
+
+jmap -dump:format=b,file=<file-path> <pid> 
+where
+pid: is the Java Process Id, whose heap dump should be captured
+file-path: is the file path where heap dump will be written in to.
+
+-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/tmp/heapdump.bin
+========================
+// These two have the same value
+new String("test").equals("test") // --> true 
+
+// ... but they are not the same object
+new String("test") == "test" // --> false 
+
+// ... neither are these
+new String("test") == new String("test") // --> false 
+
+// ... but these are because literals are interned by 
+// the compiler and thus refer to the same object
+"test" == "test" // --> true 
+
+// ... string literals are concatenated by the compiler
+// and the results are interned.
+"test" == "te" + "st" // --> true
+
+// ... but you should really just call Objects.equals()
+Objects.equals("test", new String("test")) // --> true
+Objects.equals(null, "test") // --> false
+Objects.equals(null, null) // --> true
+//If you intern the non-literal String equality is true
+
+new String("test").intern() == "test" ==> true 
+=
+==============Prime=========
+
+public class Prime {
+
+    public static void main(String[] args) {
+
+        int num = 33, i = 2;
+        boolean flag = false;
+        while(i <= num/2)
+        {
+            // condition for nonprime number
+            if(num % i == 0)
+            {
+                flag = true;
+                break;
+            }
+
+            ++i;
+        }
+
+        if (!flag)
+            System.out.println(num + " is a prime number.");
+        else
+            System.out.println(num + " is not a prime number.");
+    }
+}
+============Palindrome============
+public class Palindrome {
+
+    public static void main(String[] args) {
+
+        int num = 121, reversedInteger = 0, remainder, originalInteger;
+
+        originalInteger = num;
+
+        // reversed integer is stored in variable 
+        while( num != 0 )
+        {
+            remainder = num % 10;
+            reversedInteger = reversedInteger * 10 + remainder;
+            num  /= 10;
+        }
+
+        // palindrome if orignalInteger and reversedInteger are equal
+        if (originalInteger == reversedInteger)
+            System.out.println(originalInteger + " is a palindrome.");
+        else
+            System.out.println(originalInteger + " is not a palindrome.");
+    }
+}
+===========StringFindDuplicatesMain =============
+ HashMap charCountMap = new HashMap();
+  for (int i = 0; i < str.length(); i++) {
+   char c = str.charAt(i);
+ 
+   if (charCountMap.containsKey(c)) {
+    charCountMap.put(c, charCountMap.get(c) + 1);
+   } else {
+    charCountMap.put(c, 1);
+   }
+ 
+  }
+  for (Character c : charCountMap.keySet()) {
+   if (charCountMap.get(c) > 1)
+    System.out.println("duplicate character : " + c + " ====== " + " count : " + charCountMap.get(c));
+ 
+  }
+==========SubstringsOfStringMain==============
+
+class SubstringsOfStringMain
+{
+ public static void main(String args[])
+ {
+  String str="abbc";
+  System.out.println("All substring of abbc are:");
+   for (int i = 0; i < str.length(); i++) {
+   for (int j = i+1; j <= str.length(); j++) {
+         System.out.println(str.substring(i,j));
+  
+   }
+  }
+ }
+}
+==============isAnagramUsingArraySort==========
+
+public static boolean isAnagramUsingArraySort(String word,String anagram)
+ {
+  
+  String sortedWord=sortChars(word);
+  String sortedAnagram=sortChars(anagram);
+  
+  return sortedWord.equals(sortedAnagram) ;
+ }
+ 
+ public static String sortChars(String word)
+ {
+  char[] wordArr=word.toLowerCase().toCharArray();
+  Arrays.sort(wordArr);
+  return String.valueOf(wordArr);
+ }
+}
+---------------------------------
+ public static boolean isAnagramUsingStringMethods(String word,String anagram)
+ {
+  if(word.length()!=anagram.length())
+   return false;
+  
+  for (int i = 0; i < word.length(); i++) {
+   char c=word.charAt(i);
+   int index=anagram.indexOf(c);
+   // If index of any character is -1, then two strings are not anagrams
+   // If index of character is not equal to -1, then remove the chacter from the String
+   if(index !=-1)
+   {
+    anagram=anagram.substring(0,index)+anagram.substring(index+1,anagram.length());
+   }
+   else
+    return false;
+  }
+  return anagram.isEmpty();
+ }
+========================
+ “analogy”,  then program should return ‘n’
+
+public static Character getNonRepeatedCharacter(String str) {
+  Map<Character, Integer> countCharacters = new LinkedHashMap<Character, Integer>();
+  for (int i = 0; i < str.length() - 1; i++) {
+   Character c = str.charAt(i);
+   if (!countCharacters.containsKey(c)) {
+    countCharacters.put(c, 1);
+   } else {
+    countCharacters.put(c, countCharacters.get(c) + 1);
+   }
+  }
+  // As LinkedHashMap maintains insertion order, first character with
+  // count 1 should return first non repeated character
+  for (Entry<Character, Integer> e : countCharacters.entrySet()) {
+   if (e.getValue() == 1)
+    return e.getKey();
+ 
+  }
+  -------------------------
+   public static Character getNonRepeatedCharacter(String str)
+ {     char charaaray[]=str.toCharArray();
+       for (int i=0; i<str.length();i++)
+      {
+          if (str.lastIndexOf(charaaray[i]) == str.indexOf(charaaray[i]))
+               return charaaray[i];
+      }
+  return null;
+ }
+
+==========duplicate==============
+ HashMap charCountMap = new HashMap();
+  for (int i = 0; i < str.length(); i++) {
+   char c = str.charAt(i);
+ 
+   if (charCountMap.containsKey(c)) {
+    charCountMap.put(c, charCountMap.get(c) + 1);
+   } else {
+    charCountMap.put(c, 1);
+   }
+ 
+  }
+  for (Character c : charCountMap.keySet()) {
+   if (charCountMap.get(c) > 1)
+    System.out.println("duplicate character : " + c + " ====== " + " count : " + charCountMap.get(c));
+ 
+  }
+========================

@@ -1,0 +1,59 @@
+Introduction (Mavericks) -colleague Deepak
+------------
+Thank you for giving me this opportunity to talk about myself. As you already know My name is Amit Mishra, my work location is Vmware  India . I have completed graduation from pune university and have total 7-8 years of experience worked in Product MNC. Persistent/ Siemens IOT and currently in Vmware.
+During work break I enjoy travelling and playing outdoor games like football/badminton, this helps me in developing a good strategy, consistency, and good team player.
+I am very particular about my schedule and always manage my time efficiently. I am a bachelor and willing to take this opportunity in your company that will help my skill to grow.
+
+Here in Vmware , i am working on VMware Cloud Partner Navigator which is a SaaS platform for Cloud Providers and partners to expand their business with simplified delivery of multi-cloud services.
+This product is very similar to ecommerce platform - where we have multiple microservices in java spring Boot, distributed cache - redis.We deploy each microservices on Kubernetes cluster .Inside kubernetes we have one pod per microservices and we configure auto scaling and deploy across zones for HIgh Availability and Ambassador used for API gateway.
+
+My Roles in project
+-----------------------
+- I am working in a team of 6-7 people and everyone are maintaining one microservice and most of my work is to understand the requirements and work with neccessary people and clients what all needed for projects, we create JIRA stories to track this.
+- We are working in Agile development model, After development we ensures the quality of our services, for that we are writing Integration test and maintain three environments (pre-stg/stg/prod).
+- Also i have worked on Sonarqube side to pull Merge Request reports to overview page of MR there reviewers can see all the bugs ,duplicacy and risks.
+- Also we have to keep watch on the microservices health, we have slack notification for any staging and prod issue.we are maintaining centralized logging using logz.tio, we use AWS s3 for cold storage and ELK to see the logs. It allows searching in Time range.
+
+Challenges Faced
+-----------------
+Prob1- Resources consumption of CPN services in Kubernetes cluster ?Pods are getting stuck into pending state for infinite times.
+solN - i analyzed the consumption of each services for last 2-3 weeks data and came to conclusion few services configurations we need to increase - Memory 2Gib to 6 Gib and - CPU 2 to 3
+->Horizontal auto scaling enabled on CPU utilization 80%  and ->Node Auto scalar (it will create new EC2 instance and allocate to K8 cluster)
+
+prob2- Day to day , we are facing some level of challenges product or technical level issues. I have raised added indexing, It helps the reaction time of nested query
+
+Why are you leaving Vmware ?
+----------------------------
+Everything is awesome here, i learnt lot on Microservices , cloud native strategies, scaling my services.
+My project are very much stable now and i really feel that i am ready for a change to take more challenging assignments. and this will motivate me to push my limits.
+
+Why singapore ?
+-------------------
+Through mavericks , i am excited to work in client location which help me to lear work in cross-cultural environments , improve my foreign language skills.
+APart from this Singapore ranks second as the most globalized economy in the world... this will get better growing opportunities, better salaries, perks and chance for a better lifestyle.
+Frankly very near to our home.
+
+Tell me your strengths and weakness?
+----------------------------------------
+Strengths: I am quick learner, Proactive, Determined and focused.
+Weakness: sometimes overthinking
+
+handle stress at work?
+----------------------------------
+I prioritize certain tasks over others, communicate to co-workers and manager if i feel overworked, and remain calm through it all.
+
+Software Engineering life cycle
+----------------------------------------
+planning, system analysis, system design, development, implementation, integration and testing, and operations and maintenance.
+Practices- Code Readability, reusable , maintainable, modular , Git versioning, test cases.
+
+TDD
+------
+Test-driven development may be a balanced approach for the programming perfectly blended with tightly interwoven three activities: coding, testing (writing unit tests), and designing (refactoring) ->first goal of correcting specification instead of the validation first. In other words, TDD may be a smart approach to know and streamline the wants before writing the functional code within the line of Agile principles.
+pros -
+--------
+You only write code that’s needed – More modular design – Easier to maintain –High test coverage –Less debugging –
+
+Cons
+----
+slow process –All the members of a team got to do it - Tests got to be maintained when requirements change
